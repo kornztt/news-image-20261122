@@ -263,8 +263,9 @@ function masthead(cv: Canvas): void {
   rule(cv, 36, 132, 952, 1);
 }
 
-// Code-drawn illustration for the lead story: a desert road in Sinaloa at
-// dusk, a police car on the road, a helicopter overhead.
+// Code-drawn illustration for the lead story: the Guasave raid at dusk.
+// A military helicopter circles overhead, a cartel truck burns at a
+// roadblock, and soldiers march the handcuffed suspect to a patrol car.
 function leadIllustration(cv: Canvas, x0: number, y0: number, w: number, h: number): void {
   cv.fillRect(x0, y0, w, h, INK);
   const x1 = x0 + 3, y1 = y0 + 3, x2 = x0 + w - 3, y2 = y0 + h - 3;
@@ -278,12 +279,18 @@ function leadIllustration(cv: Canvas, x0: number, y0: number, w: number, h: numb
   // Sun.
   cv.circle(910, 205, 30, [255, 216, 100]);
   cv.ring(910, 205, 36, [255, 200, 80], 2);
-  // Helicopter silhouette.
-  cv.circle(692, 198, 13, [40, 40, 40]);
-  cv.line(704, 196, 744, 188, [40, 40, 40], 4);
-  cv.line(744, 188, 744, 178, [40, 40, 40], 3);
-  cv.line(668, 184, 720, 184, [40, 40, 40], 3);
-  cv.line(684, 212, 710, 212, [40, 40, 40], 2);
+  // Helicopter, drawn as a full aircraft: rotor, body, tail, skids.
+  const HELI: RGB = [40, 40, 40];
+  cv.line(672, 182, 750, 182, HELI, 4); // main rotor
+  cv.line(711, 182, 711, 192, HELI, 3); // rotor mast
+  cv.circle(711, 201, 14, HELI); // body
+  cv.line(723, 197, 760, 188, HELI, 5); // tail boom
+  cv.line(760, 188, 760, 176, HELI, 3); // tail fin
+  cv.line(756, 182, 756, 196, HELI, 2); // tail rotor
+  cv.line(697, 217, 725, 217, HELI, 2); // skid
+  cv.line(702, 213, 702, 217, HELI, 2);
+  cv.line(720, 213, 720, 217, HELI, 2);
+  cv.fillRect(699, 195, 12, 8, [180, 210, 230]); // cockpit window
   // Mountains.
   cv.poly([x1, 330, 700, 268, 745, 310, 800, 262, 860, 315, 920, 275, x2, 320, x2, 352, x1, 352], [90, 60, 70]);
   // Sandy ground.
@@ -298,31 +305,62 @@ function leadIllustration(cv: Canvas, x0: number, y0: number, w: number, h: numb
       [247, 243, 232], 3,
     );
   }
-  // Police car on the road.
-  cv.fillRect(700, 440, 95, 22, NAVY);
-  cv.poly([722, 440, 734, 420, 766, 420, 778, 440], NAVY);
-  cv.fillRect(736, 424, 28, 14, [180, 210, 230]);
-  cv.circle(720, 466, 9, [20, 20, 20]);
-  cv.circle(768, 466, 9, [20, 20, 20]);
-  cv.circle(720, 466, 3, [150, 150, 150]);
-  cv.circle(768, 466, 3, [150, 150, 150]);
-  cv.fillRect(732, 412, 32, 8, [20, 20, 20]);
-  cv.circle(740, 416, 5, [200, 30, 30]);
-  cv.circle(754, 416, 5, [30, 80, 200]);
-  cv.ring(740, 416, 10, [200, 30, 30], 2);
-  cv.ring(754, 416, 10, [30, 80, 200], 2);
+  // Burning truck at a roadblock, left of the road.
+  cv.fillRect(655, 420, 44, 18, [40, 40, 40]); // truck body
+  cv.fillRect(699, 424, 14, 14, [40, 40, 40]); // cab
+  cv.circle(668, 442, 7, [20, 20, 20]); // wheels
+  cv.circle(696, 442, 7, [20, 20, 20]);
+  cv.poly([658, 420, 666, 398, 674, 420], [230, 90, 20]); // flames
+  cv.poly([676, 420, 684, 402, 692, 420], [250, 180, 40]);
+  cv.poly([692, 420, 700, 404, 708, 420], [230, 90, 20]);
+  cv.circle(672, 388, 8, [120, 116, 110]); // smoke
+  cv.circle(682, 372, 10, [140, 136, 130]);
+  cv.circle(694, 356, 11, [160, 156, 150]);
+  // Soldiers marching the handcuffed suspect down the road.
+  const SOLDIER: RGB = [24, 24, 24];
+  const SUSPECT: RGB = [150, 146, 138];
+  const SKIN: RGB = [220, 180, 140];
+  // Soldier, left.
+  cv.circle(752, 404, 4, SOLDIER);
+  cv.fillRect(748, 410, 9, 16, SOLDIER);
+  cv.fillRect(748, 426, 3, 8, SOLDIER);
+  cv.fillRect(754, 426, 3, 8, SOLDIER);
+  // Suspect, centre, hands cuffed in front.
+  cv.circle(768, 404, 4, SKIN);
+  cv.fillRect(764, 410, 9, 16, SUSPECT);
+  cv.fillRect(764, 426, 3, 8, SOLDIER);
+  cv.fillRect(770, 426, 3, 8, SOLDIER);
+  cv.fillRect(765, 419, 7, 3, [247, 243, 232]);
+  // Soldier, right.
+  cv.circle(784, 404, 4, SOLDIER);
+  cv.fillRect(780, 410, 9, 16, SOLDIER);
+  cv.fillRect(780, 426, 3, 8, SOLDIER);
+  cv.fillRect(786, 426, 3, 8, SOLDIER);
+  // Patrol car on the road.
+  cv.fillRect(730, 441, 34, 7, [20, 20, 20]); // light bar
+  cv.circle(739, 444, 4, [200, 30, 30]);
+  cv.circle(755, 444, 4, [30, 80, 200]);
+  cv.ring(739, 444, 8, [200, 30, 30], 2);
+  cv.ring(755, 444, 8, [30, 80, 200], 2);
+  cv.fillRect(703, 466, 80, 16, NAVY);
+  cv.poly([722, 466, 732, 448, 764, 448, 774, 466], NAVY);
+  cv.fillRect(736, 452, 24, 12, [180, 210, 230]);
+  cv.circle(722, 484, 7, [20, 20, 20]);
+  cv.circle(766, 484, 7, [20, 20, 20]);
+  cv.circle(722, 484, 3, [150, 150, 150]);
+  cv.circle(766, 484, 3, [150, 150, 150]);
   // Caption label.
-  cv.fillRect(x1 + 5, y1 + 5, 120, 24, INK);
-  drawText(cv, 'SINALOA', x1 + 13, y1 + 11, 2, [255, 255, 255]);
+  cv.fillRect(x1 + 5, y1 + 5, 216, 24, INK);
+  drawText(cv, 'GUASAVE, SINALOA', x1 + 13, y1 + 11, 2, [255, 255, 255]);
 }
 
 function leadStory(cv: Canvas): void {
   drawText(cv, 'MEXICO', 36, 148, 3, RED);
-  drawText(cv, 'MEXICO CAPTURES', 36, 180, 6, INK);
-  drawText(cv, "'EL CHAPO ISIDRO'", 36, 234, 6, INK);
+  drawText(cv, 'CAPTURE SPARKS', 36, 180, 6, INK);
+  drawText(cv, 'SUCCESSION FEARS', 36, 234, 6, INK);
   drawBlock(
     cv,
-    "FAUSTO ISIDRO MEZA FLORES, ON THE FBI'S TEN MOST WANTED LIST, IS ARRESTED AFTER A SHOOT-OUT IN SINALOA. IT IS THE LATEST IN A STRING OF CARTEL ARRESTS.",
+    "FAUSTO ISIDRO MEZA FLORES, HELD IN MEXICO CITY AFTER FRIDAY'S RAID IN GUASAVE. ELEVEN DIED IN THE RAID, AND EXPERTS FEAR A BLOODY FIGHT FOR HIS CARTEL.",
     36, 296, 3, 584, INK,
   );
   leadIllustration(cv, 640, 148, 348, 352);
@@ -345,13 +383,12 @@ function storyColumn(
 }
 
 function middleRow(cv: Canvas): void {
-  // Ukraine, left column. Small flag mark at the top right of the column.
+  // G20, left column. Small G20 badge at the top right of the column.
   cv.fillRect(452, 536, 40, 26, INK);
-  cv.fillRect(453, 537, 38, 11, [0, 91, 187]);
-  cv.fillRect(453, 549, 38, 12, [255, 213, 0]);
-  storyColumn(cv, 36, 536, 460, 'UKRAINE',
-    ['ZELENSKYY: PUTIN IS', "A 'KILLER'"],
-    'AFTER TRUMP CALLED PUTIN A FRIEND. KYIV SAYS THE US WANTS THREE-WAY TALKS BEFORE CHRISTMAS.',
+  drawText(cv, 'G20', 458, 543, 2, [255, 255, 255]);
+  storyColumn(cv, 36, 536, 460, 'G20',
+    ['G20 OPENS IN AFRICA', 'WITHOUT THE US'],
+    'LEADERS MEET IN JOHANNESBURG FOR THE FIRST SUMMIT ON AFRICAN SOIL. ENVOYS AGREE A DRAFT TEXT.',
     3);
   // Iran / Bahrain, right column. Small radar mark at the top right.
   cv.circle(968, 549, 13, INK);
@@ -359,8 +396,8 @@ function middleRow(cv: Canvas): void {
   cv.circle(968, 549, 3, RED);
   cv.line(968, 549, 978, 541, RED, 2);
   storyColumn(cv, 528, 536, 460, 'MIDDLE EAST',
-    ['IRAN STRIKES US', 'BASES IN BAHRAIN'],
-    'TEHRAN CLAIMS ITS MISSILES HIT TWO US PATRIOT RADARS. BAHRAIN SAYS A CIVILIAN SITE BURNED. NO ONE WAS HURT.',
+    ['IRAN SAYS IT HIT', 'US BASES IN BAHRAIN'],
+    'TEHRAN CLAIMS IT HIT TWO US PATRIOT RADARS. BAHRAIN SAYS A CIVILIAN SITE BURNED. TWO WERE HURT, ONE CRITICALLY.',
     3);
   cv.line(512, 536, 512, 772, GREY, 1);
   rule(cv, 36, 784, 952, 4);
@@ -374,16 +411,16 @@ function bottomRow(cv: Canvas): void {
   cv.line(472, 804, 472, 830, [255, 255, 255], 2);
   cv.line(459, 817, 485, 817, [255, 255, 255], 2);
   storyColumn(cv, 36, 800, 460, 'CLIMATE',
-    ['COP31 NEARS DEAL', 'AFTER DEADLOCK'],
-    'AFTER RUNNING PAST ITS FRIDAY DEADLINE, THE ANTALYA SUMMIT PUTS A NEW PACKAGE TO DELEGATES ON SUNDAY.',
+    ['COP31 COLLAPSES', 'WITHOUT A DEAL'],
+    'THE EU REJECTED THE DRAFT FOR IGNORING FOSSIL FUELS. THE LONGEST COP ON RECORD ENDS WITH NO DEAL.',
     2);
   // ATP Finals, right column. Small tennis-ball mark.
   cv.circle(968, 817, 13, [180, 200, 40]);
   cv.line(958, 808, 968, 817, [255, 255, 255], 2);
   cv.line(968, 817, 978, 826, [255, 255, 255], 2);
   storyColumn(cv, 528, 800, 460, 'SPORT',
-    ['ALCARAZ FACES ZVEREV', 'FOR THE ATP TITLE'],
-    'THE SPANIARD BEAT BEN SHELTON IN A COMEBACK TO REACH THE FINAL.',
+    ['ALCARAZ WINS ATP', 'FINALS TITLE'],
+    'THE SPANIARD BEAT THE WORLD NUMBER ONE 6-2, 7-6 IN TURIN TO WIN HIS FIRST ATP FINALS TITLE.',
     2);
   cv.line(512, 800, 512, 946, GREY, 1);
   rule(cv, 36, 964, 952, 2);
@@ -391,9 +428,9 @@ function bottomRow(cv: Canvas): void {
 
 function footer(cv: Canvas): void {
   drawBlock(cv,
-    'ALSO: FBI PROBES APPARENT HACK OF ITS CRIME DATABASE - 6.7 MAGNITUDE QUAKE HITS PERU\'S ANDES, NO CASUALTIES',
+    'ALSO: TWO TANKERS HIT IN HORMUZ - IRAN SAYS IT DOWNED A US DRONE',
     36, 976, 2, 952, INK);
-  drawText(cv, 'SOURCES: BBC, REUTERS, THE INDEPENDENT, IANS - 22 NOV 2026', 36, 1010, 2, GREY);
+  drawText(cv, 'SOURCES: BBC, REUTERS, THE INDEPENDENT, IANS - 22 NOV 2026', 36, 1000, 2, GREY);
 }
 
 function main(): void {

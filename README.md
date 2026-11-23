@@ -12,17 +12,22 @@ five stories and a code-drawn illustration of the lead story — with its own
 `$MAKEFUN_OUTPUT_DIR/entry.png`. No network, no external images, fully
 deterministic: every run writes the same bytes.
 
-Stories on the page:
+Stories on the page (all from Sunday 22 November 2026):
 
-- Mexico captures "El Chapo Isidro" (Fausto Isidro Meza Flores) in Sinaloa.
-- Zelenskyy calls Putin a "killer" after Trump calls him a friend; Kyiv says
-  the US wants three-way talks before Christmas.
-- Iran strikes US bases in Bahrain; Tehran claims two Patriot radars hit,
-  Bahrain says a civilian site burned and no one was hurt.
-- COP31 nears a deal after its fossil-fuel deadlock in Antalya.
-- Alcaraz faces Zverev for the ATP Finals title.
-- Also: FBI probes an apparent hack of its crime database; a 6.7 magnitude
-  quake hits Peru's Andes with no casualties.
+- Mexico capture aftermath: "El Chapo Isidro" held in Mexico City after
+  the Guasave raid; eleven died, and experts fear a bloody fight for his
+  cartel.
+- G20 opens in Johannesburg, the first summit on African soil, without
+  the US; envoys agree a draft text.
+- Iran says it hit US bases in Bahrain; Tehran claims two Patriot radars
+  hit, Bahrain says a civilian site burned and two people were hurt, one
+  critically.
+- COP31 collapses without a deal after the EU rejects a draft that
+  ignores fossil fuels.
+- Alcaraz beats world number one Zverev 6-2, 7-6 in Turin to win his
+  first ATP Finals title.
+- Also: two tankers hit in the Strait of Hormuz; Iran says it downed a
+  US drone.
 
 Run it with:
 
